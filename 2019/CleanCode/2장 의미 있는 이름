@@ -1,0 +1,72 @@
+이름을 잘짓는 규칙
+첫째, 의도를 분명히 밝혀라
+  - 좋은 이름을 지으려면 시간이 걸리지만 좋은 이름으로 절약하는 시간이 훨씬 더 많다.
+  - 변수나 함수 그리고 클래스 이름은 다음과 같은 굵직한 질문에 모두 답해야 한다.
+    변수(혹은 함수나 클래스)의 존재 이유는? 수행 기능은? 사용 방법은? 
+    따로 주석이 필요 하다면 의돌르 분명히 드러내지 못했다는 말이다.
+    
+    int d; // 경과 시간(단위: 날짜)
+    
+    이름 d는 아무 의미도 드러나지 않는다. 겨오가 시간이나 날짜라는 느낌이 안 든다.
+    측정하려는 값과 단위를 표현하는 이름이 필요하다.
+    
+    int elapsedTiemInDays;
+    int daysSinceCreation;
+    int daySinceModification;
+    int fileAgeInDays;
+    
+    의도가 드러나는 이름을 사용하면 코드이해와 변경이 쉬워진다. 다음코드는 무엇을할까?
+     
+    public List<int[]> getThem(){
+      List<int[]> list1 = new ArrayList<int[]>();
+      for(int[] x : theList)
+        if(x[0] == 4)
+          list1.add(x);
+      return list1;
+    }
+    
+    코드가 하는 일을 짐작하기 어렵다. 복잡한 문장도 없고 공백과 들여쓰기도 적당하다.
+    문제는 코드의 단순성이 아니라 코드의 함축성이다. 다시 말해, 코드맥락이 코드자체에 명시적으로 드러나지 않는다.
+    
+    지뢰찾기로게임으로 비유시
+    게임판에서 각 칸은 단순 배열로 표현한다. 배열에서 0번째 칸은 칸 상태를 뜻한다.
+    값 4는 깃발이 꽂힌 상태를 가리킨다. 각 개념에 이름만 붙여도 코드가 상당히 나아진다.
+    
+    public List<int[]> getFlaggedCells(){
+      List<int[]> flaggedCells = new ArrayList<int[]>();
+      for (int[] cell : gameBoard)
+        if (cell[STATUS_VALUE] == FLAGGED)
+          flaggedCells.add(cells);
+      return flaggedCells;
+    }
+    
+    한 걸음 더 나아가, int 배열을 사용하는 대신, 칸을 간단한 클래스로 만들어도 되겠다.
+    isFlagged라는 좀 더 명시적인 함수를 사용해 FLAGGED라는 상수를 감춰도 좋겠다.
+    
+    public List<int[]> getFlaggedCells(){
+      List<Cell> flaggedCells = new ArrayList<Cell>();
+      for (Cell cell : gameBoard)
+        if (cell.isFlagged())
+          flaggedCells.add(cells);
+      return flaggedCells;
+    }
+   
+둘째, 그릇된 정보를 피하라
+  - 프로그래머는 코드에 그릇된 단서를 남겨서는 안 된다. 그릇된 단서는 코드 의미를 흐린다.
+    나름 널리쓰이는 의미가 있는 단어를 다른 의미로 사용해도 안 된다.
+  - 여러 계정을 그룹으로 묶을 때, 실제 List가 아니라면, accountList라 명명하지 않는다.
+    프로그래머에게 List라는 단어는 특수한 의미다. 계정을 담는 컨테이너가 실제List가 아니라면 그릇된 정보를 제공하는 셈이다.
+  - 유사한 개념은 유샇나 표기법을 사용한다. 이것도 정보다.
+  
+셋쩨, 의미 있게 구분하라.
+  - 컴파일러나 인터프리터만 통과하려는 생각으로 코드르 구현하는 프로그래머는 스스로 문제를 일으킨다
+
+
+
+
+
+    
+    
+    
+    
+    
